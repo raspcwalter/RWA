@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+import "./RWADN404.sol";
+
 /**
  * @title ImovelRWA
  * @notice RWA contract that implements Brazilian real estate property.  
@@ -26,7 +28,7 @@ Alteração de titularidade de impostos, taxas, contas de consumo e todos os enc
 
 */
 
-contract ImovelRWA is RWADNA404 {
+contract ImovelRWA is RWADN404 {
 
     constructor(
         string memory name_,
@@ -34,14 +36,11 @@ contract ImovelRWA is RWADNA404 {
         uint96 initialTokenSupply,
         address initialSupplyOwner
     ) {
-        _initializeOwner(msg.sender);
-
-        _name = name_;
-        _symbol = symbol_;
+      
         _type = "Real Estate Property";
 
-        address mirror = address(new DN404Mirror(msg.sender));
-        _initializeDN404(initialTokenSupply, initialSupplyOwner, mirror);
+        super(name_, symbol_, _type, initialTokenSupply, initialSupplyOwner);
+
     }
 
 }

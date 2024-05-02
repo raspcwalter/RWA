@@ -14,10 +14,10 @@
     "hardhat": "^2.22.3"
   },
   "dependencies": {
-    "dn404": "^0.0.16",
+    "dn404": "github:Vectorized/dn404",
     "dotenv": "^16.4.5",
     "forge-std": "^1.1.2",
-    "solady": "^0.0.194",
-    "src": "^1.1.2"
+    "solady": "github:Vectorized/solady",
+    "src": "^1.0.0"
   }
 }

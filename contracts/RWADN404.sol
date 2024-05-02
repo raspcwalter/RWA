@@ -3,6 +3,10 @@ pragma solidity ^0.8.4;
 
 // source for DN-404: https://github.com/Vectorized
 
+// install packages dn404 and solady:
+// npm install Vectorized/dn404 
+// npm install Vecotrized/solady
+
 import "dn404/src/DN404.sol";
 import "dn404/src/DN404Mirror.sol";
 import {Ownable} from "solady/src/auth/Ownable.sol";
@@ -20,7 +24,14 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
  * NFTs are minted as an address accumulates each base unit amount of tokens. 
  */
 
-abstract contract RWADN404 is DN404, Ownable {
+ abstract contract RWADN404 is DN404, Ownable {
+
+    string internal _name;
+    string internal _symbol;
+    string internal _baseURI;
+
+    // real state, vehicle, art
+    string internal _type; 
 
     struct Data {
         uint256 ano;
@@ -28,20 +39,30 @@ abstract contract RWADN404 is DN404, Ownable {
         uint256 dia; 
     }
 
-    string Telefone {
+    struct Telefone {
         uint256 codigoInternacional;
         uint256 codigoLocal; // DDD
         uint256 numeroTelefone;
     }
 
     struct PessoaFisica {
+        // KYC, false is not checked or not OK, true is OK
+        // maybe we need an intermediate state (checked but not OK)
+        bool KYC;
+
+        // endereço cripto
         address enderecoPessoa;
+        
         string nomeCompleto;
+        
         string numeroIdentidade;
         string emissorRG;
         Data dataEmissao; 
+        
         string estadoCivil;
+        
         EnderecoPostal enderecoPostal;
+        
         Telefone telefone; 
     }
 
@@ -57,13 +78,6 @@ abstract contract RWADN404 is DN404, Ownable {
         string cep;
     }
     
-    string internal _name;
-    string internal _symbol;
-    string internal _baseURI;
-
-    // real state, vehicle, art
-    string internal _type; 
-
     constructor(
         string memory name_,
         string memory symbol_,
@@ -110,5 +124,9 @@ abstract contract RWADN404 is DN404, Ownable {
 
     function withdraw() public onlyOwner {
         SafeTransferLib.safeTransferAllETH(msg.sender);
+    }
+
+    function getKYC(PessoaFisica memory pessoaFisica_) public view returns (bool) {
+        return(pessoaFisica_.KYC);
     }
 }
