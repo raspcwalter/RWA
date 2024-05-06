@@ -24,7 +24,7 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
  * NFTs are minted as an address accumulates each base unit amount of tokens. 
  */
 
- abstract contract ImovelRWADN404 is DN404, Ownable {
+ contract ImovelRWADN404 is DN404, Ownable {
 
     string internal _name;
     string internal _symbol;
@@ -32,6 +32,17 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
 
     // real estate, vehicle, art
     string internal constant _TYPE = "Real Estate"; // for now only this type of RWA
+
+    // titular do imóvel
+    PessoaFisica private _titular;
+    // descrição imóvel
+    CaracterizacaoImovel private _descricao;
+    // histórico de transações
+    Transacao[] public _historicoTransacoes;
+
+    // mapeamento tokens RWA => transações
+    mapping(ImovelRWADN404 => Transacao[]) _registroTransacoes;
+
 
     struct Data {
         uint256 ano;
@@ -54,10 +65,14 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
         address enderecoPessoa;
         
         string nomeCompleto;
+        Data dataNascimento; 
         
         string numeroIdentidade;
         string emissorRG;
         Data dataEmissao; 
+
+        string numeroCPF;
+        string statusCPF; 
         
         string estadoCivil;
         
@@ -77,19 +92,68 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
         string pais;
         string cep;
     }
+
+    struct CaracterizacaoImovel {
+        // casa, apartamento, terreno
+        string tipo; 
+        EnderecoPostal enderecoPostal;
+        // areas em cm2, 1 m2 = 10.000 cm2
+        uint256 areaTerreno;
+        uint256 areaConstruida;
+        // quartos, bnaheiros, sala, cozinha, garagem, etc. 
+        // dúvida: o melhor seria ter diversas variáveis inteiras, quartos, salas, cozinha, etc.? 
+        string distribuicao;   
+        string descricaoDetalhada;
+        // data de constituição do imóvel (e.g. habite-se de casa/apartamento, demarcação terreno, etc.)
+        Data dataImovel;
+    }
+
+    struct Transacao {
+        // tipo de transação: "compra e venda", "alienação", etc. 
+        string tipo;
+
+        PessoaFisica[] partes;
+
+        // valor da transação em centavos (1 R$ = 100 centavos)
+        uint256 valorBRL;
+        // valor em ETH no momento da transação (ETH c/ 18 zeros, ou seja, em gwei)
+        uint256 valorETH; 
+        // forma de pagamento: "à vista, parcelado, financiado, etc."
+        string formaPagamento;
+        // condições da transação
+        string condicoesTransacao;
+
+        Certidao[] certidoes; 
+    }
+
+    struct Certidao {
+        // descrição da certidão
+        string descricao;
+        string orgaoCertidao;
+        PessoaFisica titularCertidao;
+        // negativa, positiva com efeito de negativa, etc. 
+        string statusCertidao;
+        // pendências: dívida ativa, ... 
+        string pendenciasCertidao;
+        Data emissaoCertidao;
+        Data validadeCertidao;
+
+        // URI 
+        string certidaoURI;
+    }
     
     constructor(
-        string memory name_,
-        string memory symbol_,
-        string memory type_,
+    //    string memory name_,
+    //    string memory symbol_,
+    //    string memory type_,
         uint96 initialTokenSupply,
         address initialSupplyOwner
     ) {
         _initializeOwner(msg.sender);
 
-        _name = name_;
-        _symbol = symbol_;
-        _type = type_;
+        _name = "Imovel RWA DNA-404"; //name_;
+        _symbol = "IRWADN404"; // symbol_;
+    //    _type = type_;
 
         address mirror = address(new DN404Mirror(msg.sender));
         _initializeDN404(initialTokenSupply, initialSupplyOwner, mirror);
@@ -103,10 +167,39 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
         return _symbol;
     }
 
-    function getRWAType() public view returns (string memory) {
-        return _type;
+    function getRWAType() public pure returns (string memory) {
+        return _TYPE;
     }
     
+    function getKYC(PessoaFisica memory pessoaFisica_) public pure returns (bool) {
+        return(pessoaFisica_.KYC);
+    }
+
+    function setKYC(PessoaFisica memory pessoaFisica_, bool kyc_) public pure {
+        pessoaFisica_.KYC = kyc_;
+    }
+
+    function getTitultar() public view returns(PessoaFisica memory t) {
+        return(_titular);
+    }
+
+    function setTitular(PessoaFisica memory titular_) public onlyOwner {
+        _titular = titular_;
+    }
+
+    function getCaracterizacaoImovel() public view returns(CaracterizacaoImovel memory c) {
+        return(_descricao);
+    }
+
+    function setCaracterizacaoImovel(CaracterizacaoImovel memory descricao_) public onlyOwner {
+        _descricao = descricao_;
+    }
+
+//    function pushTransacao(Transacao memory t_) public onlyOwner {
+//        _historicoTransacoes.push(t_);
+//    }
+
+    // ###########################################################################################
     function _tokenURI(uint256 tokenId) internal view override returns (string memory result) {
         if (bytes(_baseURI).length != 0) {
             result = string(abi.encodePacked(_baseURI, LibString.toString(tokenId)));
@@ -125,8 +218,5 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
     function withdraw() public onlyOwner {
         SafeTransferLib.safeTransferAllETH(msg.sender);
     }
-
-    function getKYC(PessoaFisica memory pessoaFisica_) public view returns (bool) {
-        return(pessoaFisica_.KYC);
-    }
+    // ###########################################################################################
 }
