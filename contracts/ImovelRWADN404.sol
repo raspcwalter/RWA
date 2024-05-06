@@ -49,7 +49,7 @@ import "./PessoaFisica.sol";
     // descrição imóvel
     CaracterizacaoImovel private _descricao;
     // histórico de transações
-//    Transacao[] public _historicoTransacoes;
+    Transacao[] public _historicoTransacoes;
 
     // mapeamento tokens RWA => transações
 //    mapping(ImovelRWADN404 => Transacao[]) _registroTransacoes;

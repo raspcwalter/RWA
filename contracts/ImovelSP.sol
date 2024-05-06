@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+import {ERC20} from "solady/src/tokens/ERC20.sol";
+
 import "./ImovelRWADN404.sol";
 import "./PessoaFisica.sol";
 // import "./RWALib.sol";
@@ -93,22 +95,31 @@ contract ImovelSP is ImovelRWADN404 {
         // Certidao[] memory _certidoes;
 
         // 1 milhão de Reais = 62,6 ETH 
-        Transacao memory compraEVenda_ = Transacao(TipoTransacao.CompraEVenda, _comprador, _vendedor, 100000000, 62600000000000000000, FormaPagamento.OnChain); // , _certidoes);
+
+        // teste c/ 0,626 ETH 
+        Transacao memory compraEVenda_ = Transacao(TipoTransacao.CompraEVenda, _comprador, _vendedor, 100000000, 62600000000000000, FormaPagamento.OnChain); // , _certidoes);
 
         return(compraEVenda_);
     }
 
-/*    function compraVendaTerreno(address payable enderecoComprador_, address payable enderecoVendedor_) public payable {
+    function compraEVendaTerreno(address payable enderecoComprador_, address payable enderecoVendedor_) public payable {
         Transacao memory t = criaTransacao(enderecoComprador_, enderecoVendedor_);
 
         uint256 precoImovelETH_ = t.valorETH;
-        (bool success, bytes memory data) = enderecoVendedor_.call{value: precoImovelETH_}("compra e venda imovel");
-        require(success, "Falha ao enviar ether!"); 
+
+        ERC20 token = ERC20(enderecoComprador_); // como definir que é ETH ?
+
+//        (bool success, bytes memory data) = enderecoVendedor_.call{value: precoImovelETH_}("compra e venda imovel");
+        
+        // Transfere tokens do comprador para o vendedor
+        bool success = token.transferFrom(enderecoComprador_, enderecoVendedor_, precoImovelETH_);
+        // require(success, unicode"Falha na transferência de tokens");
+        require(success, "Falha ao enviar pagamento!"); 
 
         if (success) {
             _historicoTransacoes.push(t);
             setTitular(_comprador);
         }
 
-    } */
+    }
 }

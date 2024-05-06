@@ -8,8 +8,8 @@ const config: HardhatUserConfig = {
   solidity: {
     version: "0.8.24",
     settings: {
-      optimizer:
-      {enabled: true, 
+      optimizer: {
+        enabled: true, 
         runs: 200
       }
     }
@@ -28,7 +28,7 @@ const config: HardhatUserConfig = {
       accounts: {
         mnemonic: process.env.SECRET
       }
-    },
+    }
   },
   etherscan: {
     apiKey: process.env.API_KEY
