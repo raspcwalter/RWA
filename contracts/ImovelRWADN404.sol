@@ -15,6 +15,9 @@ import {SafeTransferLib} from "solady/src/utils/SafeTransferLib.sol";
 
 import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
 
+import "./PessoaFisicaLib.sol";
+import ".DataLib.sol"
+
 /**
  * @title RWADN404
  * @notice DN404 RWA contract that implements RWA abstract tokens. 
@@ -41,22 +44,16 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
     Transacao[] public _historicoTransacoes;
 
     // mapeamento tokens RWA => transações
-    mapping(ImovelRWADN404 => Transacao[]) _registroTransacoes;
+//    mapping(ImovelRWADN404 => Transacao[]) _registroTransacoes;
 
 
-    struct Data {
-        uint256 ano;
-        uint256 mes;
-        uint256 dia; 
-    }
-
-    struct Telefone {
+/*    struct Telefone {
         uint256 codigoInternacional;
         uint256 codigoLocal; // DDD
         uint256 numeroTelefone;
-    }
+    } */
 
-    struct PessoaFisica {
+/*    struct PessoaFisica {
         // KYC, false is not checked or not OK, true is OK
         // maybe we need an intermediate state (checked but not OK)
         bool KYC;
@@ -78,8 +75,8 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
         
         EnderecoPostal enderecoPostal;
         
-        Telefone telefone; 
-    }
+        // Telefone telefone; 
+    } */
 
     struct EnderecoPostal {
         string tipo; 
@@ -89,7 +86,7 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
         string bairro;
         string cidade;
         string estado;
-        string pais;
+//        string pais;
         string cep;
     }
 
@@ -123,10 +120,10 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
         // condições da transação
         string condicoesTransacao;
 
-        Certidao[] certidoes; 
+    //    Certidao[] certidoes; 
     }
 
-    struct Certidao {
+/*   struct Certidao {
         // descrição da certidão
         string descricao;
         string orgaoCertidao;
@@ -140,7 +137,7 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
 
         // URI 
         string certidaoURI;
-    }
+    } */
     
     constructor(
     //    string memory name_,
@@ -171,14 +168,6 @@ import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
         return _TYPE;
     }
     
-    function getKYC(PessoaFisica memory pessoaFisica_) public pure returns (bool) {
-        return(pessoaFisica_.KYC);
-    }
-
-    function setKYC(PessoaFisica memory pessoaFisica_, bool kyc_) public pure {
-        pessoaFisica_.KYC = kyc_;
-    }
-
     function getTitultar() public view returns(PessoaFisica memory t) {
         return(_titular);
     }

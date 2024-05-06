@@ -2,6 +2,9 @@
 pragma solidity ^0.8.4;
 
 import "./ImovelRWADN404.sol";
+import "./PessoaFisicaLib.sol";
+import "./DataLib.sol";
+
 
 contract ImovelSP is ImovelRWADN404 {
 
@@ -31,8 +34,8 @@ contract ImovelSP is ImovelRWADN404 {
         _comprador.numeroCPF = "108.832.463-09"; 
         _comprador.statusCPF = "REGULAR";
         _comprador.estadoCivil = "solteiro";
-        _comprador.enderecoPostal = EnderecoPostal("RUA", "Rua dos Bobos", 0, "", "Santa Felicidade", "Sao Paulo", "SP", "Brasil", "01001-01");
-        _comprador.telefone = Telefone(55, 11, 999997777);
+        _comprador.enderecoPostal = EnderecoPostal("RUA", "Rua dos Bobos", 0, "", "Santa Felicidade", "Sao Paulo", "SP", "01001-01");
+    //    _comprador.telefone = Telefone(55, 11, 999997777);
 
         // vendedor
         _vendedor.nomeCompleto = "Ze da Esquina";
@@ -45,19 +48,19 @@ contract ImovelSP is ImovelRWADN404 {
         _vendedor.numeroCPF = "213.287.835-88"; 
         _vendedor.statusCPF = "REGULAR";
         _vendedor.estadoCivil = "casado"; // deveria ter documentos da cônjuge
-        _vendedor.enderecoPostal = EnderecoPostal("RUA", "Rua dos Espertos", 10, "", "Santa Eficiencia", "Guarulhos", "SP", "Brasil", "01221-31");
-        _vendedor.telefone = Telefone(55, 11, 999998888);
+        _vendedor.enderecoPostal = EnderecoPostal("RUA", "Rua dos Espertos", 10, "", "Santa Eficiencia", "Guarulhos", "SP", "01221-31");
+    //    _vendedor.telefone = Telefone(55, 11, 999998888);
 
     }
 
     function _setImovel() private {
-        EnderecoPostal memory endereco_ = EnderecoPostal("rua", "Rua A", 10, "", "Praia de Surfista", "Ubatuba", "SP", "Brasil", "10777-77");
+        EnderecoPostal memory endereco_ = EnderecoPostal("rua", "Rua A", 10, "", "Praia de Surfista", "Ubatuba", "SP", "10777-77");
 
         Data memory dataEscritura_ = Data(1950, 7, 1);
 
         // terreno na praia de 1 mil m2 
         CaracterizacaoImovel memory descricao_ = CaracterizacaoImovel("terreno", endereco_, 10000000, 0, "terreno a beira mar", 
-            "terreno a beira mar na Praia de Surfiista de Ubatuba", dataEscritura_);
+            "terreno a beira mar na Praia de Surfista", dataEscritura_);
 
         setCaracterizacaoImovel(descricao_);
     }
@@ -83,15 +86,15 @@ contract ImovelSP is ImovelRWADN404 {
         _partes.push(_vendedor);
 
         // @todo implementar certidões (por enquanto ignora)
-        Certidao[] memory _certidoes;
+        // Certidao[] memory _certidoes;
 
         // 1 milhão de Reais = 62,6 ETH 
-        Transacao memory compraEVenda_ = Transacao("compra e venda", _partes, 100000000, 62600000000000000000, "a vista", "on chain", _certidoes);
+        Transacao memory compraEVenda_ = Transacao("compra e venda", _partes, 100000000, 62600000000000000000, "a vista", "on chain"); // , _certidoes);
 
         return(compraEVenda_);
     }
 
-    function compraVendaTerreno(address payable enderecoComprador_, address payable enderecoVendedor_) public payable {
+/*    function compraVendaTerreno(address payable enderecoComprador_, address payable enderecoVendedor_) public payable {
         Transacao memory t = criaTransacao(enderecoComprador_, enderecoVendedor_);
 
         uint256 precoImovelETH_ = t.valorETH;
@@ -103,5 +106,5 @@ contract ImovelSP is ImovelRWADN404 {
             setTitular(_comprador);
         }
 
-    }
+    } */
 }
