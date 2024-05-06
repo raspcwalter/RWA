@@ -11,8 +11,10 @@ contract ImovelSP is ImovelRWADN404 {
 
 //    PessoaFisica[] private _partes;
         
-    PessoaFisica private _comprador; 
-    PessoaFisica private _vendedor; 
+    PessoaFisica public _comprador; 
+    PessoaFisica public _vendedor; 
+
+    string public _message; 
 
     constructor() ImovelRWADN404(100 * 10 ** 18, msg.sender) {
     }
@@ -22,7 +24,7 @@ contract ImovelSP is ImovelRWADN404 {
         _vendedor.setAddress(enderecoVendedor_);
     }
 
-    function _setPartes() private {
+    function _setPartes() public {
 
         // comprador
         string memory nomeCompleto = "Ze das Couves";
@@ -59,7 +61,7 @@ contract ImovelSP is ImovelRWADN404 {
 
     }
 
-    function _setImovel() private {
+    function _setImovel() public {
         EnderecoPostal memory endereco_ = EnderecoPostal("Rua A, 10, Praia de Surfista, Ubatuba (SP) CEP 10777-77");
 
         Data memory dataEscritura_ = Data(1950, 7, 1);
@@ -73,13 +75,13 @@ contract ImovelSP is ImovelRWADN404 {
        
     function criaTransacao(address enderecoComprador_, address enderecoVendedor_) public returns(Transacao memory t) {
 
-        setEnderecoPartes(enderecoComprador_, enderecoVendedor_);
-
         // terreno na praia
         _setImovel();
 
         // define as partes 
         _setPartes();
+
+        setEnderecoPartes(enderecoComprador_, enderecoVendedor_);
 
         // KYC 
         _comprador.setKYC(true);
@@ -102,17 +104,25 @@ contract ImovelSP is ImovelRWADN404 {
         return(compraEVenda_);
     }
 
-    function compraEVendaTerreno(address payable enderecoComprador_, address payable enderecoVendedor_) public payable {
+    function compraEVendaTerreno(address payable enderecoComprador_, address payable enderecoVendedor_) public returns (bool) {
+
+        bool success = false;
+
         Transacao memory t = criaTransacao(enderecoComprador_, enderecoVendedor_);
 
+        require( (_comprador.getKYC() && _vendedor.getKYC()), "KYC is not OK!");
+    
         uint256 precoImovelETH_ = t.valorETH;
 
         ERC20 token = ERC20(enderecoComprador_); // como definir que é ETH ?
-
-//        (bool success, bytes memory data) = enderecoVendedor_.call{value: precoImovelETH_}("compra e venda imovel");
         
         // Transfere tokens do comprador para o vendedor
-        bool success = token.transferFrom(enderecoComprador_, enderecoVendedor_, precoImovelETH_);
+        // bool success = token.transferFrom(enderecoComprador_, enderecoVendedor_, precoImovelETH_);
+
+        // fake payment
+        _message = "deveria transferir o valor da compra aqui.";
+        success = true; 
+
         // require(success, unicode"Falha na transferência de tokens");
         require(success, "Falha ao enviar pagamento!"); 
 
@@ -121,5 +131,6 @@ contract ImovelSP is ImovelRWADN404 {
             setTitular(_comprador);
         }
 
+        return(success);
     }
 }
