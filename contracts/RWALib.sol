@@ -3,7 +3,7 @@ pragma solidity ^0.8.4;
 
 import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
 
-library RWALib {
+contract RWALib {
 
     struct Data {
         
@@ -12,7 +12,7 @@ library RWALib {
         uint256 dia; 
     }
 
-struct EnderecoPostal {
+    struct EnderecoPostal {
         string tipo; 
         string rua;
         uint16 numero;

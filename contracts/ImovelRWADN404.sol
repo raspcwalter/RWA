@@ -15,7 +15,9 @@ import {SafeTransferLib} from "solady/src/utils/SafeTransferLib.sol";
 
 import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
 
-import {RWALib} from "./RWALib.sol";
+import "./PessoaFisica.sol";
+
+// import "./RWALib.sol";
 
 /**
  * @title RWADN404
@@ -33,69 +35,114 @@ import {RWALib} from "./RWALib.sol";
     string internal _baseURI;
 
     // real estate, vehicle, art
-    string internal constant _TYPE = "Real Estate"; // for now only this type of RWA
+/*    enum TipoRWA {
+        Imovel, 
+        Veiculo, 
+        Arte
+    }
+    
+    TipoRWA public constant _TYPE = TipoRWA.Imovel; // for now only this type of RWA
+*/
 
     // titular do imóvel
-    RWALib.PessoaFisica private _titular;
+    PessoaFisica private _titular;
     // descrição imóvel
     CaracterizacaoImovel private _descricao;
     // histórico de transações
-    Transacao[] public _historicoTransacoes;
+//    Transacao[] public _historicoTransacoes;
 
     // mapeamento tokens RWA => transações
 //    mapping(ImovelRWADN404 => Transacao[]) _registroTransacoes;
 
 
 /*    struct Telefone {
+        string telefoneCompleto;
         uint256 codigoInternacional;
         uint256 codigoLocal; // DDD
-        uint256 numeroTelefone;
-    } */
+        uint256 numeroTelefone;  
+    }*/
+
+    struct Data {
+        uint256 ano;
+        uint256 mes;
+        uint256 dia; 
+    }
+
+    struct EnderecoPostal {
+        string enderecocompleto;
+    /*    string tipo; 
+        string rua;
+        uint16 numero;
+        string complemento;
+        string bairro;
+        string cidade;
+        string estado;
+        string pais;
+        string cep;*/
+    }
+
+    enum TipoImovel {
+        Apartamento, 
+        Casa, 
+        Terreno
+    }
 
      struct CaracterizacaoImovel {
         // casa, apartamento, terreno
-        string tipo; 
-        RWALib.EnderecoPostal enderecoPostal;
+        TipoImovel tipo; 
+        EnderecoPostal enderecoPostal;
         // areas em cm2, 1 m2 = 10.000 cm2
-        uint256 areaTerreno;
-        uint256 areaConstruida;
+        uint32 areaTerreno;
+        uint32 areaConstruida;
         // quartos, bnaheiros, sala, cozinha, garagem, etc. 
         // dúvida: o melhor seria ter diversas variáveis inteiras, quartos, salas, cozinha, etc.? 
-        string distribuicao;   
-        string descricaoDetalhada;
+        string descricao;
         // data de constituição do imóvel (e.g. habite-se de casa/apartamento, demarcação terreno, etc.)
-        RWALib.Data dataImovel;
+        Data dataImovel;
+    }
+
+    enum FormaPagamento {
+        Vista,
+        Parcelado,
+        Financiamento, 
+        OnChain
+    }
+
+    enum TipoTransacao {
+        CompraEVenda, 
+        AlienacaoFiduciaria,
+        Dacao
     }
 
     struct Transacao {
         // tipo de transação: "compra e venda", "alienação", etc. 
-        string tipo;
+        TipoTransacao tipo;
 
-        RWALib.PessoaFisica[] partes;
+        PessoaFisica _comprador;
+        PessoaFisica _vendedor; 
 
         // valor da transação em centavos (1 R$ = 100 centavos)
         uint256 valorBRL;
         // valor em ETH no momento da transação (ETH c/ 18 zeros, ou seja, em gwei)
         uint256 valorETH; 
         // forma de pagamento: "à vista, parcelado, financiado, etc."
-        string formaPagamento;
+        FormaPagamento formaPagamento;
         // condições da transação
-        string condicoesTransacao;
-
-    //    Certidao[] certidoes; 
+        // string condicoesTransacao;
+        //    Certidao[] certidoes; 
     }
 
 /*   struct Certidao {
         // descrição da certidão
         string descricao;
         string orgaoCertidao;
-        RWALib.PessoaFisica titularCertidao;
+        PessoaFisica titularCertidao;
         // negativa, positiva com efeito de negativa, etc. 
         string statusCertidao;
         // pendências: dívida ativa, ... 
         string pendenciasCertidao;
-        RWALib.Data emissaoCertidao;
-        RWALib.Data validadeCertidao;
+        Data emissaoCertidao;
+        Data validadeCertidao;
 
         // URI 
         string certidaoURI;
@@ -126,15 +173,16 @@ import {RWALib} from "./RWALib.sol";
         return _symbol;
     }
 
-    function getRWAType() public pure returns (string memory) {
+/*    function getRWAType() public pure returns (TipoRWA) {
         return _TYPE;
     }
-    
-    function getTitultar() public view returns(RWALib.PessoaFisica memory t) {
+*/
+
+    function getTitular() public view returns(PessoaFisica) {
         return(_titular);
     }
 
-    function setTitular(RWALib.PessoaFisica memory titular_) public onlyOwner {
+    function setTitular(PessoaFisica titular_) public onlyOwner {
         _titular = titular_;
     }
 

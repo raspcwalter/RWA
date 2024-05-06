@@ -5,7 +5,15 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.24",
+  solidity: {
+    version: "0.8.24",
+    settings: {
+      optimizer:
+      {enabled: true, 
+        runs: 200
+      }
+    }
+  },
   networks: {
     sepolia: {
       url: process.env.RPC_NODE_S,
@@ -20,7 +28,7 @@ const config: HardhatUserConfig = {
       accounts: {
         mnemonic: process.env.SECRET
       }
-    }  
+    },
   },
   etherscan: {
     apiKey: process.env.API_KEY
