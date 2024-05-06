@@ -15,8 +15,8 @@ import {SafeTransferLib} from "solady/src/utils/SafeTransferLib.sol";
 
 import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
 
-import "./PessoaFisicaLib.sol";
-import ".DataLib.sol"
+import "lib/PessoaFisicaLib.sol";
+import "lib/DataLib.sol"
 
 /**
  * @title RWADN404
