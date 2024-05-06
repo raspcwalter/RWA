@@ -15,8 +15,7 @@ import {SafeTransferLib} from "solady/src/utils/SafeTransferLib.sol";
 
 import {DateTimeLib} from "solady/src/utils/DateTimeLib.sol";
 
-import "lib/PessoaFisicaLib.sol";
-import "lib/DataLib.sol"
+import {RWALib} from "./RWALib.sol";
 
 /**
  * @title RWADN404
@@ -37,7 +36,7 @@ import "lib/DataLib.sol"
     string internal constant _TYPE = "Real Estate"; // for now only this type of RWA
 
     // titular do imóvel
-    PessoaFisica private _titular;
+    RWALib.PessoaFisica private _titular;
     // descrição imóvel
     CaracterizacaoImovel private _descricao;
     // histórico de transações
@@ -53,47 +52,10 @@ import "lib/DataLib.sol"
         uint256 numeroTelefone;
     } */
 
-/*    struct PessoaFisica {
-        // KYC, false is not checked or not OK, true is OK
-        // maybe we need an intermediate state (checked but not OK)
-        bool KYC;
-
-        // endereço cripto
-        address enderecoPessoa;
-        
-        string nomeCompleto;
-        Data dataNascimento; 
-        
-        string numeroIdentidade;
-        string emissorRG;
-        Data dataEmissao; 
-
-        string numeroCPF;
-        string statusCPF; 
-        
-        string estadoCivil;
-        
-        EnderecoPostal enderecoPostal;
-        
-        // Telefone telefone; 
-    } */
-
-    struct EnderecoPostal {
-        string tipo; 
-        string rua;
-        uint16 numero;
-        string complemento;
-        string bairro;
-        string cidade;
-        string estado;
-//        string pais;
-        string cep;
-    }
-
-    struct CaracterizacaoImovel {
+     struct CaracterizacaoImovel {
         // casa, apartamento, terreno
         string tipo; 
-        EnderecoPostal enderecoPostal;
+        RWALib.EnderecoPostal enderecoPostal;
         // areas em cm2, 1 m2 = 10.000 cm2
         uint256 areaTerreno;
         uint256 areaConstruida;
@@ -102,14 +64,14 @@ import "lib/DataLib.sol"
         string distribuicao;   
         string descricaoDetalhada;
         // data de constituição do imóvel (e.g. habite-se de casa/apartamento, demarcação terreno, etc.)
-        Data dataImovel;
+        RWALib.Data dataImovel;
     }
 
     struct Transacao {
         // tipo de transação: "compra e venda", "alienação", etc. 
         string tipo;
 
-        PessoaFisica[] partes;
+        RWALib.PessoaFisica[] partes;
 
         // valor da transação em centavos (1 R$ = 100 centavos)
         uint256 valorBRL;
@@ -127,13 +89,13 @@ import "lib/DataLib.sol"
         // descrição da certidão
         string descricao;
         string orgaoCertidao;
-        PessoaFisica titularCertidao;
+        RWALib.PessoaFisica titularCertidao;
         // negativa, positiva com efeito de negativa, etc. 
         string statusCertidao;
         // pendências: dívida ativa, ... 
         string pendenciasCertidao;
-        Data emissaoCertidao;
-        Data validadeCertidao;
+        RWALib.Data emissaoCertidao;
+        RWALib.Data validadeCertidao;
 
         // URI 
         string certidaoURI;
@@ -168,11 +130,11 @@ import "lib/DataLib.sol"
         return _TYPE;
     }
     
-    function getTitultar() public view returns(PessoaFisica memory t) {
+    function getTitultar() public view returns(RWALib.PessoaFisica memory t) {
         return(_titular);
     }
 
-    function setTitular(PessoaFisica memory titular_) public onlyOwner {
+    function setTitular(RWALib.PessoaFisica memory titular_) public onlyOwner {
         _titular = titular_;
     }
 

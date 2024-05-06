@@ -1,0 +1,314 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "RWALib",
+  "sourceName": "contracts/RWALib.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "KYC",
+              "type": "bool"
+            },
+            {
+              "internalType": "address",
+              "name": "enderecoPessoa",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "nomeCompleto",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "ano",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "mes",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "dia",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct RWALib.Data",
+              "name": "dataNascimento",
+              "type": "tuple"
+            },
+            {
+              "internalType": "string",
+              "name": "numeroIdentidade",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "emissorRG",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "ano",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "mes",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "dia",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct RWALib.Data",
+              "name": "dataEmissao",
+              "type": "tuple"
+            },
+            {
+              "internalType": "string",
+              "name": "numeroCPF",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "statusCPF",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "estadoCivil",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "tipo",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "rua",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "numero",
+                  "type": "uint16"
+                },
+                {
+                  "internalType": "string",
+                  "name": "complemento",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "bairro",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "cidade",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "estado",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "cep",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct RWALib.EnderecoPostal",
+              "name": "enderecoPostal",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct RWALib.PessoaFisica",
+          "name": "pessoaFisica_",
+          "type": "tuple"
+        }
+      ],
+      "name": "getKYC",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "KYC",
+              "type": "bool"
+            },
+            {
+              "internalType": "address",
+              "name": "enderecoPessoa",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "nomeCompleto",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "ano",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "mes",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "dia",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct RWALib.Data",
+              "name": "dataNascimento",
+              "type": "tuple"
+            },
+            {
+              "internalType": "string",
+              "name": "numeroIdentidade",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "emissorRG",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "ano",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "mes",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "dia",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct RWALib.Data",
+              "name": "dataEmissao",
+              "type": "tuple"
+            },
+            {
+              "internalType": "string",
+              "name": "numeroCPF",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "statusCPF",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "estadoCivil",
+              "type": "string"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "tipo",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "rua",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint16",
+                  "name": "numero",
+                  "type": "uint16"
+                },
+                {
+                  "internalType": "string",
+                  "name": "complemento",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "bairro",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "cidade",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "estado",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "cep",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct RWALib.EnderecoPostal",
+              "name": "enderecoPostal",
+              "type": "tuple"
+            }
+          ],
+          "internalType": "struct RWALib.PessoaFisica",
+          "name": "pessoaFisica_",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bool",
+          "name": "kyc_",
+          "type": "bool"
+        }
+      ],
+      "name": "setKYC",
+      "outputs": [],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6107e6610053600b82828239805160001a607314610046577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600436106100405760003560e01c8063314601a014610045578063cb72ce8614610061575b600080fd5b61005f600480360381019061005a91906106e1565b610091565b005b61007b6004803603810190610076919061073d565b6100a5565b6040516100889190610795565b60405180910390f35b808260000190151590811515815250505050565b600081600001519050919050565b6000604051905090565b600080fd5b600080fd5b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b610115826100cc565b810181811067ffffffffffffffff82111715610134576101336100dd565b5b80604052505050565b60006101476100b3565b9050610153828261010c565b919050565b600080fd5b60008115159050919050565b6101728161015d565b811461017d57600080fd5b50565b60008135905061018f81610169565b92915050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006101c082610195565b9050919050565b6101d0816101b5565b81146101db57600080fd5b50565b6000813590506101ed816101c7565b92915050565b600080fd5b600080fd5b600067ffffffffffffffff821115610218576102176100dd565b5b610221826100cc565b9050602081019050919050565b82818337600083830152505050565b600061025061024b846101fd565b61013d565b90508281526020810184848401111561026c5761026b6101f8565b5b61027784828561022e565b509392505050565b600082601f830112610294576102936101f3565b5b81356102a484826020860161023d565b91505092915050565b6000819050919050565b6102c0816102ad565b81146102cb57600080fd5b50565b6000813590506102dd816102b7565b92915050565b6000606082840312156102f9576102f86100c7565b5b610303606061013d565b90506000610313848285016102ce565b6000830152506020610327848285016102ce565b602083015250604061033b848285016102ce565b60408301525092915050565b600061ffff82169050919050565b61035e81610347565b811461036957600080fd5b50565b60008135905061037b81610355565b92915050565b60006101008284031215610398576103976100c7565b5b6103a361010061013d565b9050600082013567ffffffffffffffff8111156103c3576103c2610158565b5b6103cf8482850161027f565b600083015250602082013567ffffffffffffffff8111156103f3576103f2610158565b5b6103ff8482850161027f565b60208301525060406104138482850161036c565b604083015250606082013567ffffffffffffffff81111561043757610436610158565b5b6104438482850161027f565b606083015250608082013567ffffffffffffffff81111561046757610466610158565b5b6104738482850161027f565b60808301525060a082013567ffffffffffffffff81111561049757610496610158565b5b6104a38482850161027f565b60a08301525060c082013567ffffffffffffffff8111156104c7576104c6610158565b5b6104d38482850161027f565b60c08301525060e082013567ffffffffffffffff8111156104f7576104f6610158565b5b6105038482850161027f565b60e08301525092915050565b60006101e08284031215610526576105256100c7565b5b61053161016061013d565b9050600061054184828501610180565b6000830152506020610555848285016101de565b602083015250604082013567ffffffffffffffff81111561057957610578610158565b5b6105858482850161027f565b6040830152506060610599848285016102e3565b60608301525060c082013567ffffffffffffffff8111156105bd576105bc610158565b5b6105c98482850161027f565b60808301525060e082013567ffffffffffffffff8111156105ed576105ec610158565b5b6105f98482850161027f565b60a08301525061010061060e848285016102e3565b60c08301525061016082013567ffffffffffffffff81111561063357610632610158565b5b61063f8482850161027f565b60e08301525061018082013567ffffffffffffffff81111561066457610663610158565b5b6106708482850161027f565b610100830152506101a082013567ffffffffffffffff81111561069657610695610158565b5b6106a28482850161027f565b610120830152506101c082013567ffffffffffffffff8111156106c8576106c7610158565b5b6106d484828501610381565b6101408301525092915050565b600080604083850312156106f8576106f76100bd565b5b600083013567ffffffffffffffff811115610716576107156100c2565b5b6107228582860161050f565b925050602061073385828601610180565b9150509250929050565b600060208284031215610753576107526100bd565b5b600082013567ffffffffffffffff811115610771576107706100c2565b5b61077d8482850161050f565b91505092915050565b61078f8161015d565b82525050565b60006020820190506107aa6000830184610786565b9291505056fea264697066735822122070c53ac369f5b53a1a29397f777cbbc01735d4113da15092294af171c0bf31ca64736f6c63430008180033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600436106100405760003560e01c8063314601a014610045578063cb72ce8614610061575b600080fd5b61005f600480360381019061005a91906106e1565b610091565b005b61007b6004803603810190610076919061073d565b6100a5565b6040516100889190610795565b60405180910390f35b808260000190151590811515815250505050565b600081600001519050919050565b6000604051905090565b600080fd5b600080fd5b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b610115826100cc565b810181811067ffffffffffffffff82111715610134576101336100dd565b5b80604052505050565b60006101476100b3565b9050610153828261010c565b919050565b600080fd5b60008115159050919050565b6101728161015d565b811461017d57600080fd5b50565b60008135905061018f81610169565b92915050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006101c082610195565b9050919050565b6101d0816101b5565b81146101db57600080fd5b50565b6000813590506101ed816101c7565b92915050565b600080fd5b600080fd5b600067ffffffffffffffff821115610218576102176100dd565b5b610221826100cc565b9050602081019050919050565b82818337600083830152505050565b600061025061024b846101fd565b61013d565b90508281526020810184848401111561026c5761026b6101f8565b5b61027784828561022e565b509392505050565b600082601f830112610294576102936101f3565b5b81356102a484826020860161023d565b91505092915050565b6000819050919050565b6102c0816102ad565b81146102cb57600080fd5b50565b6000813590506102dd816102b7565b92915050565b6000606082840312156102f9576102f86100c7565b5b610303606061013d565b90506000610313848285016102ce565b6000830152506020610327848285016102ce565b602083015250604061033b848285016102ce565b60408301525092915050565b600061ffff82169050919050565b61035e81610347565b811461036957600080fd5b50565b60008135905061037b81610355565b92915050565b60006101008284031215610398576103976100c7565b5b6103a361010061013d565b9050600082013567ffffffffffffffff8111156103c3576103c2610158565b5b6103cf8482850161027f565b600083015250602082013567ffffffffffffffff8111156103f3576103f2610158565b5b6103ff8482850161027f565b60208301525060406104138482850161036c565b604083015250606082013567ffffffffffffffff81111561043757610436610158565b5b6104438482850161027f565b606083015250608082013567ffffffffffffffff81111561046757610466610158565b5b6104738482850161027f565b60808301525060a082013567ffffffffffffffff81111561049757610496610158565b5b6104a38482850161027f565b60a08301525060c082013567ffffffffffffffff8111156104c7576104c6610158565b5b6104d38482850161027f565b60c08301525060e082013567ffffffffffffffff8111156104f7576104f6610158565b5b6105038482850161027f565b60e08301525092915050565b60006101e08284031215610526576105256100c7565b5b61053161016061013d565b9050600061054184828501610180565b6000830152506020610555848285016101de565b602083015250604082013567ffffffffffffffff81111561057957610578610158565b5b6105858482850161027f565b6040830152506060610599848285016102e3565b60608301525060c082013567ffffffffffffffff8111156105bd576105bc610158565b5b6105c98482850161027f565b60808301525060e082013567ffffffffffffffff8111156105ed576105ec610158565b5b6105f98482850161027f565b60a08301525061010061060e848285016102e3565b60c08301525061016082013567ffffffffffffffff81111561063357610632610158565b5b61063f8482850161027f565b60e08301525061018082013567ffffffffffffffff81111561066457610663610158565b5b6106708482850161027f565b610100830152506101a082013567ffffffffffffffff81111561069657610695610158565b5b6106a28482850161027f565b610120830152506101c082013567ffffffffffffffff8111156106c8576106c7610158565b5b6106d484828501610381565b6101408301525092915050565b600080604083850312156106f8576106f76100bd565b5b600083013567ffffffffffffffff811115610716576107156100c2565b5b6107228582860161050f565b925050602061073385828601610180565b9150509250929050565b600060208284031215610753576107526100bd565b5b600082013567ffffffffffffffff811115610771576107706100c2565b5b61077d8482850161050f565b91505092915050565b61078f8161015d565b82525050565b60006020820190506107aa6000830184610786565b9291505056fea264697066735822122070c53ac369f5b53a1a29397f777cbbc01735d4113da15092294af171c0bf31ca64736f6c63430008180033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

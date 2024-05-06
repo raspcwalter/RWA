@@ -2,16 +2,15 @@
 pragma solidity ^0.8.4;
 
 import "./ImovelRWADN404.sol";
-import "./PessoaFisicaLib.sol";
-import "./DataLib.sol";
 
+import {RWALib} from "./RWALib.sol";
 
 contract ImovelSP is ImovelRWADN404 {
 
-    PessoaFisica[] private _partes;
+    RWALib.PessoaFisica[] private _partes;
         
-    PessoaFisica private _comprador; 
-    PessoaFisica private _vendedor; 
+    RWALib.PessoaFisica private _comprador; 
+    RWALib.PessoaFisica private _vendedor; 
 
     constructor() ImovelRWADN404(100 * 10 ** 18, msg.sender) {
     }
@@ -25,38 +24,38 @@ contract ImovelSP is ImovelRWADN404 {
 
         // comprador
         _comprador.nomeCompleto = "Ze das Couves";
-        Data memory nascimentoComprador = Data(1970, 4, 1);
+        RWALib.Data memory nascimentoComprador = RWALib.Data(1970, 4, 1);
         _comprador.dataNascimento = nascimentoComprador;
         _comprador.numeroIdentidade = "777.777.777-77";
         _comprador.emissorRG = "SSP/SP";
-        Data memory emissaoRGComprador = Data(1980, 1, 1);
+        RWALib.Data memory emissaoRGComprador = RWALib.Data(1980, 1, 1);
         _comprador.dataEmissao = emissaoRGComprador;
         _comprador.numeroCPF = "108.832.463-09"; 
         _comprador.statusCPF = "REGULAR";
         _comprador.estadoCivil = "solteiro";
-        _comprador.enderecoPostal = EnderecoPostal("RUA", "Rua dos Bobos", 0, "", "Santa Felicidade", "Sao Paulo", "SP", "01001-01");
+        _comprador.enderecoPostal = RWALib.EnderecoPostal("RUA", "Rua dos Bobos", 0, "", "Santa Felicidade", "Sao Paulo", "SP", "01001-01");
     //    _comprador.telefone = Telefone(55, 11, 999997777);
 
         // vendedor
         _vendedor.nomeCompleto = "Ze da Esquina";
-        Data memory nascimentoVendedor = Data(1975, 4, 1);
+        RWALib.Data memory nascimentoVendedor = RWALib.Data(1975, 4, 1);
         _vendedor.dataNascimento = nascimentoVendedor;
         _vendedor.numeroIdentidade = "888.888.888-88";
         _vendedor.emissorRG = "OAB/SP";
-        Data memory emissaoRGVendedor = Data(1985, 1, 1);
+        RWALib.Data memory emissaoRGVendedor = RWALib.Data(1985, 1, 1);
         _vendedor.dataEmissao = emissaoRGVendedor;
         _vendedor.numeroCPF = "213.287.835-88"; 
         _vendedor.statusCPF = "REGULAR";
         _vendedor.estadoCivil = "casado"; // deveria ter documentos da cônjuge
-        _vendedor.enderecoPostal = EnderecoPostal("RUA", "Rua dos Espertos", 10, "", "Santa Eficiencia", "Guarulhos", "SP", "01221-31");
+        _vendedor.enderecoPostal = RWALib.EnderecoPostal("RUA", "Rua dos Espertos", 10, "", "Santa Eficiencia", "Guarulhos", "SP", "01221-31");
     //    _vendedor.telefone = Telefone(55, 11, 999998888);
 
     }
 
     function _setImovel() private {
-        EnderecoPostal memory endereco_ = EnderecoPostal("rua", "Rua A", 10, "", "Praia de Surfista", "Ubatuba", "SP", "10777-77");
+        RWALib.EnderecoPostal memory endereco_ = RWALib.EnderecoPostal("rua", "Rua A", 10, "", "Praia de Surfista", "Ubatuba", "SP", "10777-77");
 
-        Data memory dataEscritura_ = Data(1950, 7, 1);
+        RWALib.Data memory dataEscritura_ = RWALib.Data(1950, 7, 1);
 
         // terreno na praia de 1 mil m2 
         CaracterizacaoImovel memory descricao_ = CaracterizacaoImovel("terreno", endereco_, 10000000, 0, "terreno a beira mar", 
@@ -76,8 +75,8 @@ contract ImovelSP is ImovelRWADN404 {
         _setPartes();
 
         // KYC 
-        setKYC(_comprador, true);
-        setKYC(_vendedor, true);
+        RWALib.setKYC(_comprador, true);
+        RWALib.setKYC(_vendedor, true);
 
         // define dono do imóvel
         setTitular(_vendedor);
